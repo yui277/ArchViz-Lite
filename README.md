@@ -5,6 +5,7 @@
 > **轻量引擎 · Rhino直读 · 本地计算 · 多端适配 · 风格化显示 · 分析动画直出 · AI集成**
 
 ### **Live Web / 在线体验**: [www.lichengfu2003.top/tools/ava.html](http://www.lichengfu2003.top/tools/ava.html)
+### **Intro Doc / 详细介绍**: [www.lichengfu2003.top/tools/intro/ava_tool_intro.html](www.lichengfu2003.top/tools/intro/ava_tool_intro.html)
 
 **If you are a professional developer in a related field and find my project interesting, feel free to contact me! Since programming isn't actually my major, and I'm more inclined to delve deeper into design in the future, I'm currently seeking strong partners to discuss the future development plans for this series of projects!**
 
