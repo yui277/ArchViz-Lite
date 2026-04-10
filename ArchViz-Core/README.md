@@ -1,170 +1,155 @@
-# AVA (ArchViz Lite)
+# ArchViz-Core
 
-> **Lightweight Engine | Native Rhino Support | Local Computing | Multi-Device | Stylized Visualization | Instant Analysis | AI Integration**
+**轻量级 3D 建筑可视化引擎 -- 教育参考版本**
+
+`v1.2.4 (260410)`
+
+---
+
+> **重要声明**
 >
-> **轻量引擎 · Rhino直读 · 本地计算 · 多端适配 · 风格化显示 · 分析动画直出 · AI集成**
+> 本项目为教育参考版本，旨在展示 WebGL 建筑可视化工具的架构设计与工程实践。源代码经过抽象化处理，不可直接用于生产环境。
 
-### **Live Web / 在线体验**: [www.lichengfu2003.top/tools/ava.html](http://www.lichengfu2003.top/tools/ava.html)
+---
 
-**If you are a professional developer in a related field and find my project interesting, feel free to contact me! Since programming isn't actually my major, and I'm more inclined to delve deeper into design in the future, I'm currently seeking strong partners to discuss the future development plans for this series of projects!**
+## 项目简介
 
-**如果你是相关领域的专业开发者，觉得我的项目有趣，欢迎联系我！因为实际上编程并非我的主业，我在未来也更倾向于深耕艺术与设计，所以我目前也正在寻求强力的合作伙伴，不论是想个人对接个人还是企业对接企业，我都可以安排，交流关于这系列项目的未来开发计划！**
+ArchViz Lite（小蜡烛）是一个基于 Three.js 的轻量级建筑可视化工具，支持多格式模型加载、AI 辅助动画和渲染、实时剖切分析等功能。本仓库（ArchViz-Core）提取了生产项目的核心架构与模块接口，以教育参考的形式开源，供开发者学习 WebGL 3D 可视化工具的工程设计模式。
 
-## Origin & Philosophy (项目初衷)
+主要能力包括：
 
-### The "Student" Pain Point (源于校园的真实需求)
+- 多格式 3D 模型加载（.3dm / .glb / .gltf / .obj），原生支持 Rhino 文件
+- 10+ 种风格化视觉预设（素模、蓝图、手绘、X光、像素风等）
+- AI 动画生成（自然语言 -> 相机脚本 -> 动画播放）
+- AI 智能出图（多渠道图生图渲染）
+- 实时剖切分析（Stencil Buffer 三步渲染）
+- 后期处理管线（Bloom / 像素化 / 边缘检测 / 半调网点）
+- 跨设备交互适配（桌面 / 平板 / 手机）
 
-The inception of AVA dates back to my sophomore year. Like many design students, I faced a dilemma: professional visualization software (like Lumion/D5) requires heavy workstation laptops, while existing web viewers often demand uploading files to public clouds, charging subscription fees, or failing to support raw `.3dm` files natively.
+## 技术栈
 
-Designers needed a tool that respects their privacy, runs on any device (even an iPad on a dusty construction site), and visualizes design intent instantly without the "rendering tax."
+| 类别 | 技术 |
+|------|------|
+| 渲染引擎 | Three.js (r160+) / WebGL 2.0 |
+| 模块系统 | ES Modules (原生浏览器 import) |
+| AI 集成 | DeepSeek (动画) / 通义万相 / Flux / 火山引擎 (出图) |
+| 后端 | PHP (未包含在本仓库中) |
+| 许可证 | CC BY-NC-SA 4.0 |
 
-项目的雏形诞生于大二时期。和许多建环专业学生一样，我发现市面上的商业化云渲染工具往往针对大型工程项目设计，不仅收费昂贵，还依赖将文件上传至云端服务器。对于学生或小型工作室而言，我们需要的不是繁重的渲染农场，而是一个**纯前端、零依赖、即开即用**的轻量化工具。
-
-### The "Studio" Solution (解决事务所的汇报痛点)
-
-In professional practice, small studios often rely on static PPTs for client presentations. When a client asks, *"What does it look like from that corner?"* or *"Can we see the section cut here?"*, designers awkwardly scramble to open Rhino on a laptop, disrupting the flow.
-
-**AVA changes this.** It allows designers to embed interactive 3D models directly into presentation slides or share a secure link. It transforms a static pitch into a dynamic, interactive discussion, professionalizing the workflow for boutique firms. **In addition, the lightweight nature of the tool also allows team members to view and collaborate on projects anytime, anywhere.**
-
-在小型事务所团队的汇报场景中，静态的 PPT 效果图往往难以应对甲方的突发提问（如“这个死角的视野是怎样的？”）。现场打开 Rhino 模型不仅缓慢，且容易打断汇报节奏。AVA 旨在解决这一痛点：它让 3D 交互能够像图片一样轻便，甚至直接嵌入 PPT，让每一次汇报都显得专业且从容。**此外，工具的轻量性也可以满足团队成员随时随地对项目进行查看与协作。**
-
-## Target Scenarios (核心应用场景)
-
-### 1. Academic & Education (高校与教学)
-
-- **Instant Crits**: Students can show models to tutors on a tablet/phone instantly without carrying a gaming laptop.
-- **Course Presentation**: Interactive diagrams and stylized analysis (Heatmaps, Blueprint mode) generated in seconds, replacing hours of rendering.
-- **校园汇报**: 取代耗时的渲染图，用实时交互的轴测图、蓝图风格和热力图直接进行方案推敲与汇报。
-
-### 2. Boutique Studios & Agile Teams (小型事务所与敏捷团队)
-
-- **Interactive Pitching**: Embed the AVA web viewer link into slides. When clients have questions, switch to the live view instantly.
-- **Site Visits & Collaboration**: Check complex Rhino details on an iPad while walking through the construction site, no internet required (Local mode). The lightweight nature of the tool also allows team members to view and collaborate on projects anytime, anywhere.
-- **敏捷汇报与协作**: 在汇报现场实时响应甲方的视角需求，展现专业度。**此外，工具的轻量性也可以满足团队成员随时随地对项目进行查看与协作。**
-
-### 3. Future Commercial Services (未来商业服务愿景)
-
-- **Private Cloud Deployment**: Secure, password-protected sharing links (similar to Google Drive/Baidu Netdisk) for client deliverables, ensuring data never leaves the firm's control.
-- **Digital Twin Customization**: For large-scale urban projects (e.g., street blocks), we can customize AVA into a "Lightweight Digital Twin" dashboard with specific UI, buttons, and analysis data, accessible via a single link.
-- **私有化定制**: 为事务所提供类似网盘的加密分享链接服务，或为大型项目定制专属的“轻量化数字孪生”展示页。
-
-## Core Features (技术特性)
-
-### 1. Native Asset Support (原生资产支持)
-
-- **Rhino Native**: Direct support for `.3dm` files (Rhino 5/6/7/8) via `rhino3dm.wasm`.
-- **Universal Formats**: Full support for `.glb/.gltf` (Draco compressed) and `.obj`.
-- **Smart Optimization**: Auto-detection of Z-up/Y-up axis, high-poly warning (>2M verts), and auto-scaling.
-
-### 2. Visual Styles & Analysis (风格与分析)
-
-Powered by custom GLSL shaders for instant artistic expression:
-
-- **Artistic Modes**: Clay (素模), Blueprint (蓝图), Sketch (手绘), PixelArt (像素风), Retro (复古).
-- **Analysis Modes**:
-  - **Height Heatmap**: Visualization of building massing height (Y/Z axis).
-  - **Real-time Sectioning**: 3-axis capping cuts with solid fills.
-  - **X-Ray/Ghosted**: Internal structure inspection.
-
-### 3. AI-Powered Workflow (AI 集成与实景分析)
-
-Integrates Reality Synthesis, AI Rendering, and AI Animation to rapidly generate basic analysis diagrams.
-
-集成 实景合成、AI出图、AI动画 等功能，帮助设计师 快速获得基础分析图。
-
-- **Reality Synthesis (实景合成)**: Overlay 3D models on live camera feed for instant site context analysis (AR-Lite).
-  - *调用设备摄像头作为背景，实现模型与现场实景的实时合成与分析。*
-- **Smart Export (AI出图 / Aliyun & Flux)**: Image-to-Image AI rendering to turn basic viewport screenshots into photorealistic visuals.
-  - *基于图生图技术，将简单的视口截图瞬间转化为高质量效果图。*
-- **Generative Animation (AI动画 / DeepSeek)**: Natural language camera control (e.g., *"Rotate 360 and cut from top"*).
-  - *AI 驱动的脚本生成，通过自然语言一键产出动态分析演示。*
-
-### 4. Interaction Architecture (交互架构)
-
-- **Smart Tools**: Intelligent edge measurement, bounding box info.
-- **Camera System**: Seamless switching: Orthographic <-> Perspective <-> 2-Point Perspective.
-- **Multi-Device**: Fully optimized for touch input (iPad/Mobile) with responsive Fluent Design UI.
-
-## Technical Architecture (技术架构)
-
-This project follows a strict Modular Architecture.
-
-Note: The UI/CSS implementation is proprietary. This repository contains the core logic patterns.
-
-> 本项目采用低耦合、高内聚的模块化设计。
->
-> 注：UI与具体样式实现为闭源部分，本仓库开源了核心逻辑与架构模式。
+## 项目结构
 
 ```
-graph TD
-    A[User Input / Touch] --> B(InteractionManager);
-    B --> C{Core Engine};
-    C --> D[ModelLoader];
-    C --> E[Lighting System];
-    C --> F[Post-Processing];
-    
-    D --> |rhino3dm/Draco| G[3D Assets];
-    
-    H[AI Modules] -.-> |JSON Script| B;
-    H -.-> |Img2Img| F;
+ArchViz-Core/
+├── src/
+│   ├── config.js                    # 分区式配置中心（APP/DEFAULTS/API/AI/EXPORT）
+│   ├── InteractionManager.js        # 交互管理器：设备检测、工具模式状态机、快捷键系统
+│   ├── core/
+│   │   └── ArchVizEngine.js         # 渲染引擎核心：场景、双相机、控制器、渲染循环
+│   ├── modules/
+│   │   ├── AIAnimation.js           # AI 动画模块：双阶段架构（Planner + Executor）
+│   │   ├── ModelLoader.js           # 模型加载器：多格式加载、坐标系检测、灯光系统
+│   │   ├── SmartExport.js           # 智能导出：抽象工厂模式、三渠道 AI 出图
+│   │   ├── PostProcessing.js        # 后期处理：EffectComposer 管线管理
+│   │   └── SectionCut.js            # 剖切分析：Stencil Buffer 截面渲染
+│   └── shaders/
+│       └── CustomShaders.js         # 自定义 GLSL 着色器（高度热力图/深度图/像素化）
+├── docs/                            # 技术文档目录
+│   ├── ARCHITECTURE.md              # 整体架构设计文档
+│   ├── AI-INTEGRATION.md            # AI 集成与提示工程指南
+│   ├── RENDERING-PIPELINE.md        # 渲染管线技术文档
+│   ├── MODEL-LOADING.md             # 模型加载策略文档
+│   └── API-DESIGN-PATTERNS.md       # 后端 API 设计模式文档
+├── LICENSE                          # CC BY-NC-SA 4.0 许可证
+├── README.md                        # 本文件
+└── CHANGELOG.md                     # 变更日志
 ```
 
-### Directory Structure (目录结构)
+## 核心模块说明
 
-- `src/core/`:
-  - `ArchVizEngine.js`: WebGL loop, scene management.
-  - `InteractionManager.js`: State management & Tool Strategy Pattern.
-- `src/modules/`:
-  - `ModelLoader.js`: Async asset pipeline (Unit/Axis fix).
-  - `SmartExport.js`: Cloud API integration (Aliyun/Flux).
-  - `AIAnimation.js`: LLM-based animation script logic.
-- `src/shaders/`: Custom GLSL shaders (PixelArt, Heatmaps).
+### ArchVizEngine -- 渲染引擎核心
 
-## Getting Started (本地运行)
+`src/core/ArchVizEngine.js`
 
-Since this is a client-side web application, you can run it with any static file server.
+管理 Three.js 场景的完整生命周期：场景图、双相机系统（正交 + 透视）、WebGL 渲染器、轨道/变换控制器、后期处理管道、辅助覆盖层和渲染循环。支持正交、透视、两点透视三种相机模式的无缝切换。
 
-1. **Clone the repository**
+### ModelLoader -- 多格式模型加载
 
-   ```
-   git clone [https://github.com/lichengfu2003/ArchViz-Lite.git](https://github.com/lichengfu2003/ArchViz-Lite.git)
-   ```
+`src/modules/ModelLoader.js`
 
-2. **Serve the files** (e.g., using Python)
+统一的 3D 资产加载管线，自动检测文件格式并分发到对应的 Three.js 加载器。内置坐标系检测（Z-up / Y-up）、单位转换（mm -> m）、几何优化、性能预警。同时包含 LightingSystem 类，提供可配置的太阳光 + 填充光照明系统。
 
-   ```
-   cd ArchViz-Lite
-   python -m http.server 8000
-   ```
+### InteractionManager -- 交互与设备适配
 
-3. Open Browser
+`src/InteractionManager.js`
 
-   Visit http://localhost:8000
+基于策略模式的交互管理器，定义了五种工具模式（浏览 / 测量 / 移动 / 隐藏 / 剖切）。集成了跨设备输入归一化（指针/触摸统一）、CSS Media Query 级设备能力检测、WebGL 图形能力探测、快捷键注册系统和视口快照机制。
 
-## License & Rights (版权与授权)
+### AIAnimation -- AI 动画生成
 
-**Copyright © 2025 Lichengfu2003. All Rights Reserved.**
+`src/modules/AIAnimation.js`
 
-This project is licensed under the **CC BY-NC-SA 4.0** (Attribution-NonCommercial-ShareAlike 4.0 International).
+双阶段 AI 动画管线。Stage 1（Planner）将用户的自然语言描述通过 LLM 转化为导演级镜头计划；Stage 2（Executor）将镜头计划翻译为帧级动画时间线，驱动相机运动、风格切换、剖切动画等 10 种原子操作。
 
-- ✅ **Educational Use**: Free for students, teachers, and researchers.
-- ✅ **Personal Study**: Free for individual developers to learn the architecture.
-- ❌ **Commercial Use**: Strictly **PROHIBITED** without permission.
+### SmartExport -- 智能 AI 出图
 
-> **Commercial Licensing / Custom Deployment (商业合作)**
->
-> If you are a design firm looking for **Private Cloud Deployment (私有云部署)**, **Digital Twin Customization (数字孪生定制)**, or secure project hosting services, please contact the author.
->
-> **If you are a professional developer in a related field and find my project interesting, feel free to contact me! Since programming isn't actually my major, and I'm more inclined to delve deeper into design in the future, I'm currently seeking strong partners to discuss the future development plans for this series of projects!**
->
-> 如需 **企业私有化部署**（加密文件分享）、**大型项目数字孪生定制** 或 **商业授权**，请联系作者。
->
-> **如果你是相关领域的专业开发者，觉得我的项目有趣，欢迎联系我！因为实际上编程并非我的主业，我在未来也更倾向于深耕艺术与设计，所以我目前也正在寻求强力的合作伙伴，不论是想个人对接个人还是企业对接企业，我都可以安排，交流关于这系列项目的未来开发计划！**
+`src/modules/SmartExport.js`
 
-## Contact (联系方式)
+基于抽象工厂模式的多渠道 AI 渲染导出系统。定义了统一的 AIRenderChannel 接口，实现了三个具体渠道（通义万相 / Flux / 火山引擎即梦）。支持视口截图、AI 图生图渲染、批量导出等工作流。
 
-- **Author**: Lichengfu2003
-- **Email**: [lichengfu2003@outlook.com](mailto:lichengfu2003@outlook.com)
-- **Website**: [lichengfu2003.top](https://www.lichengfu2003.top/)
+### PostProcessing -- 后期处理管线
 
-*Developed with ❤️ by Lichengfu2003 @ Cell&Chord Design (Shenzhen).*
+`src/modules/PostProcessing.js`
+
+基于 Three.js EffectComposer 的后期处理管线管理器。支持 Bloom 辉光、像素化、Sobel 边缘检测（手绘风格）、半调网点四种互斥的视觉效果 Pass，以及始终启用的 RenderPass 基础渲染。
+
+### SectionCut -- 剖切分析系统
+
+`src/modules/SectionCut.js`
+
+基于 GPU Stencil Buffer 的实时建筑截面分析模块。采用三步渲染技术（背面模板写入 -> 正面模板擦除 -> 截面填充），支持 X/Y/Z 三轴剖切、偏移量动态调节、拓扑分析（水密性检测）。
+
+### CustomShaders -- 自定义着色器
+
+`src/shaders/CustomShaders.js`
+
+三组自定义 GLSL 着色器，包含完整的图形学原理注释：高度热力图（HeightMapShader，分段线性插值伪彩色映射）、深度可视化（DepthMapShader，线性深度灰度/伪彩色）、像素化滤镜（PixelShader，UV 量化全屏后处理）。
+
+## 技术文档索引
+
+| 文档 | 说明 |
+|------|------|
+| `docs/ARCHITECTURE.md` | 整体架构设计：模块关系、数据流、生命周期管理 |
+| `docs/AI-INTEGRATION.md` | AI 集成：动画管线、智能出图、Prompt 工程策略 |
+| `docs/RENDERING-PIPELINE.md` | 渲染管线：WebGL 配置、阴影系统、Stencil 管线、后期处理链路 |
+| `docs/MODEL-LOADING.md` | 模型加载：多格式适配、坐标系转换、几何优化、性能门控 |
+| `docs/API-DESIGN-PATTERNS.md` | API 设计模式：抽象工厂、异步渠道接口、轮询策略 |
+
+## 学习指南
+
+建议按以下顺序阅读源码：
+
+1. **架构概览** -- 先阅读 `docs/ARCHITECTURE.md`，了解整体架构设计和模块关系
+2. **配置中心** -- 阅读 `src/config.js`，理解分区式配置架构和各模块的配置接口
+3. **核心引擎** -- 阅读 `src/core/ArchVizEngine.js`，掌握场景初始化、双相机系统和渲染循环
+4. **交互系统** -- 阅读 `src/InteractionManager.js`，学习策略模式在工具切换中的应用
+5. **模型加载** -- 阅读 `src/modules/ModelLoader.js`，了解多格式加载管线和灯光系统设计
+6. **剖切分析** -- 阅读 `src/modules/SectionCut.js`，理解 Stencil Buffer 三步渲染技术
+7. **后期处理** -- 阅读 `src/modules/PostProcessing.js`，学习 EffectComposer 管线组装模式
+8. **着色器** -- 阅读 `src/shaders/CustomShaders.js`，GLSL 着色器原理（含详细图形学注释）
+9. **AI 集成** -- 阅读 `src/modules/AIAnimation.js` 和 `src/modules/SmartExport.js`，了解 LLM 动画管线和抽象工厂导出模式
+10. **API 设计** -- 阅读 `docs/API-DESIGN-PATTERNS.md`，学习异步渠道接口和轮询策略设计
+
+## 许可证
+
+本项目采用 **CC BY-NC-SA 4.0**（署名-非商业性使用-相同方式共享 4.0 国际）许可证。
+
+- 允许：学习研究、教学用途、在相同协议下修改和分发
+- 禁止：任何形式的商业用途（未经书面授权）
+
+详见 [LICENSE](./LICENSE) 文件。
+
+## 声明
+
+本项目版权归原作者 Lichengfu2003 所有，仅供学习研究使用。
+
+如需商业授权、企业私有化部署或数字孪生定制服务，请联系作者：lichengfu2003@outlook.com
