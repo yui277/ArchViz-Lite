@@ -1,6 +1,6 @@
 # ArchViz-Core
 
-**轻量级 3D 建筑可视化引擎 -- 教育参考版本**
+**轻量级 3D 建筑可视化引擎 -- 技术解析版本**
 
 `v1.2.4 (260410)`
 
@@ -8,13 +8,13 @@
 
 > **重要声明**
 >
-> 本项目为教育参考版本，旨在展示 WebGL 建筑可视化工具的架构设计与工程实践。源代码经过抽象化处理，不可直接用于生产环境。
+> 本项目为技术解析版本，展示 WebGL 建筑可视化工具的架构设计与工程实践。源代码经过抽象化处理，不可直接用于生产环境。
 
 ---
 
 ## 项目简介
 
-ArchViz Lite（小蜡烛）是一个基于 Three.js 的轻量级建筑可视化工具，支持多格式模型加载、AI 辅助动画和渲染、实时剖切分析等功能。本仓库（ArchViz-Core）提取了生产项目的核心架构与模块接口，以教育参考的形式开源，供开发者学习 WebGL 3D 可视化工具的工程设计模式。
+ArchViz Lite（小蜡烛）是一个基于 Three.js 的轻量级建筑可视化工具。本仓库（ArchViz-Core）提取了生产项目的核心架构与模块接口，以开源形式分享其工程设计模式。
 
 主要能力包括：
 
@@ -124,20 +124,20 @@ ArchViz-Core/
 | `docs/MODEL-LOADING.md` | 模型加载：多格式适配、坐标系转换、几何优化、性能门控 |
 | `docs/API-DESIGN-PATTERNS.md` | API 设计模式：抽象工厂、异步渠道接口、轮询策略 |
 
-## 学习指南
+## 源码导读
 
-建议按以下顺序阅读源码：
+建议阅读顺序：
 
-1. **架构概览** -- 先阅读 `docs/ARCHITECTURE.md`，了解整体架构设计和模块关系
-2. **配置中心** -- 阅读 `src/config.js`，理解分区式配置架构和各模块的配置接口
-3. **核心引擎** -- 阅读 `src/core/ArchVizEngine.js`，掌握场景初始化、双相机系统和渲染循环
-4. **交互系统** -- 阅读 `src/InteractionManager.js`，学习策略模式在工具切换中的应用
-5. **模型加载** -- 阅读 `src/modules/ModelLoader.js`，了解多格式加载管线和灯光系统设计
-6. **剖切分析** -- 阅读 `src/modules/SectionCut.js`，理解 Stencil Buffer 三步渲染技术
-7. **后期处理** -- 阅读 `src/modules/PostProcessing.js`，学习 EffectComposer 管线组装模式
-8. **着色器** -- 阅读 `src/shaders/CustomShaders.js`，GLSL 着色器原理（含详细图形学注释）
-9. **AI 集成** -- 阅读 `src/modules/AIAnimation.js` 和 `src/modules/SmartExport.js`，了解 LLM 动画管线和抽象工厂导出模式
-10. **API 设计** -- 阅读 `docs/API-DESIGN-PATTERNS.md`，学习异步渠道接口和轮询策略设计
+1. `docs/ARCHITECTURE.md` → 整体架构和模块关系
+2. `src/config.js` → 分区式配置架构
+3. `src/core/ArchVizEngine.js` → 场景初始化、双相机、渲染循环
+4. `src/InteractionManager.js` → 策略模式工具切换
+5. `src/modules/ModelLoader.js` → 多格式加载管线、灯光系统
+6. `src/modules/SectionCut.js` → Stencil Buffer 三步渲染
+7. `src/modules/PostProcessing.js` → EffectComposer 管线组装
+8. `src/shaders/CustomShaders.js` → GLSL 着色器实现
+9. `src/modules/AIAnimation.js` + `SmartExport.js` → LLM 动画管线、抽象工厂导出
+10. `docs/API-DESIGN-PATTERNS.md` → 异步渠道接口、轮询策略
 
 ## 许可证
 
@@ -150,6 +150,6 @@ ArchViz-Core/
 
 ## 声明
 
-本项目版权归原作者 Lichengfu2003 所有，仅供学习研究使用。
+本项目版权归原作者 Lichengfu2003 所有。
 
 如需商业授权、企业私有化部署或数字孪生定制服务，请联系作者：lichengfu2003@outlook.com
