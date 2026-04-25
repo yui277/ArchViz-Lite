@@ -1,4 +1,4 @@
-# AVA (ArchViz Lite)
+# 小蜡烛 (ArchViz Lite)
 
 > **Lightweight Engine | Native Rhino Support | Local Computing | Multi-Device | Stylized Visualization | Instant Analysis | AI Integration**
 >
